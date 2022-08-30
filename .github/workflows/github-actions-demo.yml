@@ -16,3 +16,16 @@ jobs:
         run: |
           ls ${{ github.workspace }}
       - run: echo "🍏 This job's status is ${{ job.status }}."
+      - name: Install 
+        run: |
+          sudo apt install wget
+          wget https://github.com/kkos/oniguruma/releases/download/v5.9.6/onig-5.9.6.tar.gz
+          tar zvxf onig-5.9.6.tar.gz
+          cd onig-5.9.6
+          rm config.sub
+          rm config.guess
+          wget http://savannah.gnu.org/cgi-bin/viewcvs/*checkout*/config/config/config.guess
+          wget http://savannah.gnu.org/cgi-bin/viewcvs/*checkout*/config/config/config.sub
+          ./configure
+          make
+          sudo make install
